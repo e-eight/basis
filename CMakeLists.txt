@@ -6,7 +6,7 @@ endif()
 
 project(basis LANGUAGES CXX)
 
-set (TARGET basis)
+set(TARGET basis)
 
 set(SOURCES jjjpn_operator.cpp jjjpn_scheme.cpp
             jjjt_operator.cpp jjjt_scheme.cpp
