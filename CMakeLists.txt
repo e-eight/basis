@@ -19,22 +19,22 @@ set(SOURCES jjjpn_operator.cpp jjjpn_scheme.cpp
 function(add_headers VAR)
   set(headers ${${VAR}})
   foreach (header ${ARGN})
-    set(headers ${headers} ../${CMAKE_CURRENT_SOURCE_DIR}/${header})
+    set(headers ${headers} ${CMAKE_CURRENT_SOURCE_DIR}/${header})
   endforeach()
   set(${VAR} ${headers} PARENT_SCOPE)
 endfunction()
 
 add_headers(HEADERS basis.h degenerate.h
-            hypersector.h
-            jjjpn_operator.h jjjpn_scheme.h
-            jjjt_operator.h jjjt_scheme.h
-            jt_operator.h
-            lsjt_operator.h lsjt_scheme.h
-            m_scheme.h
-            many_body.h
-            nlj_operator.h nlj_orbital.h
-            operator.h
-            proton_neutron.h)
+                    hypersector.h
+                    jjjpn_operator.h jjjpn_scheme.h
+                    jjjt_operator.h jjjt_scheme.h
+                    jt_operator.h
+                    lsjt_operator.h lsjt_scheme.h
+                    m_scheme.h
+                    many_body.h
+                    nlj_operator.h nlj_orbital.h
+                    operator.h
+                    proton_neutron.h)
 
 add_library(${TARGET} STATIC ${SOURCES} ${HEADERS})
 
