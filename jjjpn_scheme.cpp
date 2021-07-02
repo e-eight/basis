@@ -208,7 +208,7 @@ namespace basis {
     int Jmax = TwiceValue(jmax);
 
     // iterate over two-body species
-    std::initializer_list<basis::TwoBodySpeciesPN> species_list;
+    std::array<basis::TwoBodySpeciesPN,3> species_list;
     if (space_ordering_==basis::TwoBodySpaceJJJPNOrdering::kPN)
       species_list = {TwoBodySpeciesPN::kPP,TwoBodySpeciesPN::kNN,TwoBodySpeciesPN::kPN};
     else  // if (space_ordering_==basis::TwoBodySpaceJJJPNOrdering::kTz)

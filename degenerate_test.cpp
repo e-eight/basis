@@ -1,5 +1,5 @@
 /************************************************************//**
-  @file multibasis_test.cpp
+  @file degenerate_test.cpp
 
   Language: C++11
 
@@ -234,7 +234,7 @@ namespace basis {
           << std::endl;
       }
 
-    os << " " << "dimensions: size " << size() << " full_dimension " << full_dimension() << std::endl;
+    os << " " << "dimensions: size " << size() << " dimension " << dimension() << std::endl;
 
     return os.str();
 
@@ -285,7 +285,7 @@ namespace basis {
 
                 RelativeDegenerateSubspaceLSJT subspace(L,S,J,T,g,Nmax);
                 assert(subspace.size()!=0);
-                PushSubspace(subspace);
+                PushSubspace(subspace,2);
               }
           }
       }
@@ -306,7 +306,11 @@ namespace basis {
           << " " << "size"
           << " " << subspace.size()
           << " " << "full_dimension"
-          << " " << subspace.full_dimension()
+          << " " << subspace.dimension()
+          << " " << "degeneracy"
+          << " " << GetSubspaceDegeneracy(subspace_index)
+          << " " << "offset"
+          << " " << GetSubspaceOffset(subspace_index, 1)
           << std::endl;
         if (show_subspaces)
           os << subspace.DebugStr();
@@ -334,10 +338,10 @@ void Test()
   basis::RelativeDegenerateSpaceLSJT space(N_max,J_max);
   std::cout << space.DebugStr(true) << std::endl;
   std::cout
-    << " " << "Dimension"
-    << " " << space.Dimension()
+    << " " << "Size"
+    << " " << space.size()
     << " " << "FullDimension "
-    << " " << space.FullDimension()
+    << " " << space.dimension()
     << std::endl;
   std::cout << std::endl;
 

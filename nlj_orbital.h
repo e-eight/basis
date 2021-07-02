@@ -5,7 +5,7 @@
 
   Language: C++11
 
-  Mark A. Caprio
+  Mark A. Caprio, Patrick J. Fasano
   University of Notre Dame
 
   + 7/7/16 (mac): Created (jjjpnorb_scheme), building on code from jjjt_scheme.
@@ -64,6 +64,8 @@
     integer overflow.
   + 05/27/19 (pjf): Update to initialize BaseSectors with spaces.
   + 06/03/19 (pjf): Add OrbitalPNInfo constructor which takes tz.
+  + 09/06/19 (pjf): Add TruncateOrbitalList.
+  + 10/10/19 (pjf): Fix standalone output of 15200 orbital files.
 
 ****************************************************************/
 
@@ -78,6 +80,7 @@
 #include "mcutils/parsing.h"
 
 #include "basis/basis.h"
+#include "basis/many_body.h"
 #include "basis/proton_neutron.h"
 
 namespace basis {
@@ -135,6 +138,7 @@ namespace basis {
   // a simple list of orbitals
   typedef std::vector<OrbitalPNInfo> OrbitalPNList;
 
+  // canonical orbital sorting
   inline bool OrbitalSortCmpWeight(const OrbitalPNInfo& lhs, const OrbitalPNInfo& rhs) {
     std::tuple<OrbitalSpeciesPN,double,int,HalfInt,int>
       lhs_labels(lhs.orbital_species, lhs.weight, lhs.l, lhs.j, lhs.n);
@@ -142,6 +146,15 @@ namespace basis {
       rhs_labels(rhs.orbital_species, rhs.weight, rhs.l, rhs.j, rhs.n);
     return (lhs_labels < rhs_labels);
   }
+
+  OrbitalPNList TruncateOrbitalList(
+      const WeightMax& weight_max, const OrbitalPNList& orbital_list
+    );
+  // Apply weight max truncation to a list of orbitals.
+  //
+  // Arguments:
+  //   weight_max (WeightMax): truncation parameters
+  //   orbital_list (OrbitalPNList): input list of orbitals
 
   // orbital I/O
 
